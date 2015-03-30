@@ -180,7 +180,7 @@ var Panel = React.createClass({
 
         var compilerMessagePanel = [
             <Label className="hoj offset-top">Compiler Message</Label>,
-            <Segment className="inverted" style={{overflowX: 'scroll'}}>
+            <Segment className="inverted" style={{overflowX: 'auto'}}>
                 <code dangerouslySetInnerHTML={{__html: this.state.message}}></code>
             </Segment>
         ];
@@ -220,11 +220,10 @@ var Panel = React.createClass({
         return (
             <Grid className="three column centered grid">
                 <Column className=""><h1 style={{marginTop: 20}} className="ui header centered">Haskell Online Judge</h1></Column>
-
                 <Column className="fifteen wide centered row">
                     <Column className="six wide" style={{float: this.state.float}}>
                         <Form>
-                            <div className="three fields">
+                            <div className="four fields">
                                 <Field style={{paddingTop: '0.5rem'}}>
                                     <Checkbox className="toggle">
                                         <input type="checkbox" name="float" checked={this.state.float === 'right'} onChange={function(){}} />
@@ -238,7 +237,7 @@ var Panel = React.createClass({
                                     </Checkbox>
                                 </Field>
                                 <Field>
-                                    <Button onClick={this.handleModal.bind(this, '.problem-modal')}>Problem</Button>
+                                    <Button onClick={this.handleModal.bind(this, '.problem-modal')}><i className="file text icon"></i> Problem</Button>
                                 </Field>
                             </div>
                         </Form>
@@ -248,7 +247,7 @@ var Panel = React.createClass({
                     <Column className="ten wide">
                         <Form>
                             <Field>
-                                <Label>Code</Label>
+                                <Label className="hoj offset-top">Code</Label>
                                 <div className="hoj offset-top"></div>
                                 <AceEditor
                                     mode="c_cpp"
@@ -261,7 +260,7 @@ var Panel = React.createClass({
                                 />
                             </Field>
                             <Field style={{textAlign: 'right'}}>
-                                <Button className="blue right" onClick={this.handleSubmit} ref="submit">Submit</Button>
+                                <Button className="green right" onClick={this.handleSubmit} ref="submit"><i className="check icon"></i> Submit</Button>
                             </Field>
                         </Form>
                     </Column>

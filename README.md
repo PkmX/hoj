@@ -5,7 +5,7 @@ Clone the repository recursively:
 $ git clone --recursive git@github.com:PkmX/hoj.git
 ```
 
-Or update all submodules manually:
+Or update all submodules manually after cloning:
 ```
 $ git submodule update
 ```
@@ -13,13 +13,13 @@ $ git submodule update
 ## Client
 
 ```
-$ cd client && npm install && webpack -p
+$ pushd client && npm install && node_modules/.bin/webpack -p && popd
 ```
 
 ## Server
 
 ```
-$ cd server && cabal sandbox init && cabal install
+$ pushd server && cabal sandbox init && cabal install && popd
 ```
 
 ## EasySandbox
@@ -35,7 +35,7 @@ $ ln -s EasySandbox/EasySandbox.so EasySandbox.so
 $ server/.cabal-sandbox/bin/hoj --help
 Haskell Online Judge System
 
-Usage: hoj [--bind ip-address] [--port port] [--debug] [--timelimit �s]
+Usage: hoj [--bind ip-address] [--port port] [--debug] [--timelimit μs]
            [--clientdir directory] [--problempdf problem.pdf]
            [[test-input test-output]...]
 

@@ -1,29 +1,29 @@
-var React = require('react'),
-    AceEditor = require('react-ace'),
-    Semantify = require('react-semantify'),
-    request = require('superagent'),
-    ansi_up = require('ansi_up'),
-    escapeHtml = require('./escapeHtml'),
-    jQuery = $ = require('jquery'),
-    ga = require('react-google-analytics'),
+var React         = require('react'),
+    AceEditor     = require('react-ace'),
+    Semantify     = require('react-semantify'),
+    request       = require('superagent'),
+    ansi_up       = require('ansi_up'),
+    escapeHtml    = require('./escapeHtml'),
+    ga            = require('react-google-analytics'),
+    jQuery        = require('imports?jQuery=jquery!exports?jQuery!semantic-ui/dist/semantic.js'),
+    $             = jQuery,
     GAInitializer = ga.Initializer,
-    Button = Semantify.Button,
-    Form = Semantify.Form,
-    Grid = Semantify.Grid,
-    Label = Semantify.Label,
-    Field = Semantify.Field,
-    Column = Semantify.Column,
-    Menu = Semantify.Menu,
-    Modal = Semantify.Modal,
-    Item = Semantify.Item,
-    Icon = Semantify.Icon,
-    Segment = Semantify.Segment,
-    Checkbox = Semantify.Checkbox,
-    Input = Semantify.Input;
+    Button        = Semantify.Button,
+    Checkbox      = Semantify.Checkbox,
+    Column        = Semantify.Column,
+    Field         = Semantify.Field,
+    Form          = Semantify.Form,
+    Grid          = Semantify.Grid,
+    Icon          = Semantify.Icon,
+    Input         = Semantify.Input,
+    Item          = Semantify.Item,
+    Label         = Semantify.Label,
+    Menu          = Semantify.Menu,
+    Modal         = Semantify.Modal,
+    Segment       = Semantify.Segment;
 
 require('colors');
 require('semantic-ui/dist/semantic.min.css');
-jQuery = $ = require('imports?jQuery=jquery!exports?jQuery!semantic-ui/dist/semantic.js');
 require('./style.scss');
 
 var ProblemModal = React.createClass({
@@ -32,7 +32,7 @@ var ProblemModal = React.createClass({
         return {
             className: 'problem-modal',
             pdf: 'dummy.pdf'
-        }
+        };
     },
 
     render: function() {
@@ -59,20 +59,18 @@ var Panel = React.createClass({
 
     getInitialState: function(){
         return {
-            cases: [],
-            message: '',
-            output: '',
-            output_eof_nl: true,
-            input: localStorage.getItem('input') || '',
-            local: localStorage.getItem('local') == 1 || false,
-            code: localStorage.getItem('code') || '',
-            float: localStorage.getItem('float') || 'left'
+            cases         : [],
+            message       : '',
+            output        : '',
+            output_eof_nl : true,
+            input         : localStorage.getItem('input')      || '',
+            local         : localStorage.getItem('local') == 1 || false,
+            code          : localStorage.getItem('code')       || '',
+            float         : localStorage.getItem('float')      || 'left'
         };
     },
 
     handleChange: function(name, e) {
-        //console.log(name, e);
-
         var state = this.state;
 
         switch(name)
@@ -91,7 +89,7 @@ var Panel = React.createClass({
                 break;
             case 'float':
                 state.float = e.target.checked ? 'right' : 'left';
-                localStorage.setItem('float', state.float)
+                localStorage.setItem('float', state.float);
                 break;
         }
 
@@ -106,7 +104,7 @@ var Panel = React.createClass({
         state.cases   = body.results || [];
         state.output  = (body.output && escapeHtml(body.output).replace(/(?:\r\n|\r|\n)/g, '<br />')) || '';
 
-        if (state.output != '' && ! body.output.match(/(\r\n|\r|\n)$/g)) {
+        if (state.output !== '' && ! body.output.match(/(\r\n|\r|\n)$/g)) {
             state.output_eof_nl = false;
         } else {
             state.output_eof_nl = true;
@@ -123,10 +121,6 @@ var Panel = React.createClass({
 
         var req = request
             .post(window.location.origin + '/submit')
-            //.part()
-            //.set('Content-Disposition', 'form-data; name="code"')
-            //.set('Content-Type', 'text/plain')
-            //.send('code=' + encodeURI(this.code))
             .field('code', this.state.code)
             .field('local', this.state.local);
 
@@ -148,7 +142,6 @@ var Panel = React.createClass({
     },
 
     handleModal: function(target, e) {
-        //$(target).modal('toggle');
         window.open('problem.pdf', '_blank', 'menubar=no, location=no, titlebar=no');
     },
 
@@ -156,16 +149,15 @@ var Panel = React.createClass({
         this.setState(this.state);
     },
 
-    handlePDFLoad: function(){
-        alert(1);
-    },
-
     componentDidMount: function(){
         var self = this;
         $('.ui.checkbox').checkbox().each(function(i, e){
             $(e).change(self.handleChange.bind(self, $(e).children('input').attr('name')));
         });
+
         window.addEventListener('resize', this.handleResize);
+
+        // send request to Google Analytics
         ga('create', 'UA-44646112-4', 'auto');
         ga('send', 'pageview');
     },
@@ -286,5 +278,4 @@ React.render(
     </div>,
     document.body
 );
-
 

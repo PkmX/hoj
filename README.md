@@ -1,5 +1,15 @@
 # Installation
 
+Clone the repository recursively:
+```
+$ git clone --recursive git@github.com:PkmX/hoj.git
+```
+
+Or update all submodules manually:
+```
+$ git submodule update
+```
+
 ## Client
 
 ```
@@ -15,8 +25,7 @@ $ cd server && cabal sandbox init && cabal install
 ## EasySandbox
 
 ```
-$ cd EasySandbox && make all runtests
-$ cd ..
+$ pushd EasySandbox && make all runtests && popd
 $ ln -s EasySandbox/EasySandbox.so EasySandbox.so
 ```
 

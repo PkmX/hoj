@@ -1,0 +1,7 @@
+/client/build/
+npm-debug.log
+node_modules/
+
+cabal.sandbox.config
+.cabal-sandbox
+/server/dist/

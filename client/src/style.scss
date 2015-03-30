@@ -1,0 +1,29 @@
+body {
+    overflow-x: hidden;
+}
+
+ol.cases
+{
+    counter-reset: item;
+    list-style-type: none;
+
+    li:before {
+        color: black;
+        content: 'Case ' counter(item, decimal) '. ';
+        counter-increment: item;
+    }
+}
+
+.hoj
+{
+    &.offset-top
+    {
+        margin-top: 1rem;
+    }
+
+    &.input
+    {
+        font-family: monospace,monospace;
+    }
+}
+

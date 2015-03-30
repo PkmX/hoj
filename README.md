@@ -26,7 +26,7 @@ $ pushd server && cabal sandbox init && cabal install && popd
 
 ```
 $ pushd EasySandbox && make all runtests && popd
-$ ln -s EasySandbox/EasySandbox.so EasySandbox.so
+$ ln -s EasySandbox/EasySandbox.so libEasySandbox.so
 ```
 
 # Running

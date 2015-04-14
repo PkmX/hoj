@@ -70,6 +70,13 @@ var Panel = React.createClass({
         };
     },
 
+    formatConsoleOutput: function(output) {
+        if (output)
+            return ansi_up.ansi_to_html(escapeHtml(output)).replace(/(?:\r\n|\r|\n)/g, '<br />');
+        else
+            return '';
+    },
+
     handleChange: function(name, e) {
         var state = this.state;
 
@@ -100,9 +107,10 @@ var Panel = React.createClass({
 
     updateSegments: function(body) {
         var state = this.state;
-        state.message = (body.compilerError && ansi_up.ansi_to_html(escapeHtml(body.compilerError)).replace(/(?:\r\n|\r|\n)/g, '<br />')) || '';
-        state.cases   = body.results || [];
-        state.output  = (body.output && escapeHtml(body.output).replace(/(?:\r\n|\r|\n)/g, '<br />')) || '';
+        state.message =  this.formatConsoleOutput(body.compilerOutput);
+        state.message += this.formatConsoleOutput(body.compilerError);
+        state.cases   =  body.results || [];
+        state.output  =  (body.output && escapeHtml(body.output).replace(/(?:\r\n|\r|\n)/g, '<br />')) || '';
 
         if (state.output !== '' && ! body.output.match(/(\r\n|\r|\n)$/g)) {
             state.output_eof_nl = false;

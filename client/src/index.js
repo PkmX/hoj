@@ -110,7 +110,7 @@ var Panel = React.createClass({
         state.message =  this.formatConsoleOutput(body.compilerOutput);
         state.message += this.formatConsoleOutput(body.compilerError);
         state.cases   =  body.results || [];
-        state.output  =  (body.output && escapeHtml(body.output).replace(/(?:\r\n|\r|\n)/g, '<br />')) || '';
+        state.output  =  this.formatConsoleOutput(body.output);
 
         if (state.output !== '' && ! body.output.match(/(\r\n|\r|\n)$/g)) {
             state.output_eof_nl = false;

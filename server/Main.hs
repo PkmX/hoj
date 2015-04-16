@@ -39,7 +39,7 @@ submit tests mainfn timelimit = do
     userInput <- maybeParam "input"
     result <- liftIO $ withMkstemp "/tmp/hojprog-" $ \(path, h) -> do
       T.hPutStrLn stderr $ "Compiling as " <> T.pack path
-      (clangExit, clangOut, clangErr) <- readProcessWithExitCodeText "clang++" [ "-std=c++14", "-O2", "-march=native", "-Wall", "-Wextra", "-pedantic", "-Wshadow", "-Wcast-qual", "-fcolor-diagnostics", "-fstack-protector-strong", "--param=ssp-buffer-size=4", "-D_FORTIFY_SOURCE=2", "-L.", "-lEasySandbox", "-xc++", "-", "-o", path ] $ if isNothing userInput then code <> mainfn else code
+      (clangExit, clangOut, clangErr) <- readProcessWithExitCodeText "clang++" [ "-std=c++14", "-O2", "-march=native", "-Wall", "-Wextra", "-pedantic", "-Wshadow", "-Wcast-qual", "-fcolor-diagnostics", "-fstack-protector-strong", "--param=ssp-buffer-size=4", "-D_FORTIFY_SOURCE=2", "-L.", "-lEasySandbox", "-xc++", "-", "-o", path ] $ if isNothing userInput then code <> "\n" <> mainfn else code
       hClose h
       case clangExit of
         ExitSuccess -> do

@@ -5,7 +5,7 @@ var React         = require('react'),
     ansi_up       = require('ansi_up'),
     escapeHtml    = require('./escapeHtml'),
     ga            = require('react-google-analytics'),
-    jQuery        = require('imports?jQuery=jquery!exports?jQuery!semantic-ui/dist/semantic.js'),
+    jQuery        = require('imports?jQuery=jquery!exports?jQuery!../node_modules/semantic-ui-css/semantic.js'),
     $             = jQuery,
     GAInitializer = ga.Initializer,
     Button        = Semantify.Button,
@@ -23,7 +23,7 @@ var React         = require('react'),
     Segment       = Semantify.Segment;
 
 require('colors');
-require('semantic-ui/dist/semantic.min.css');
+require('../node_modules/semantic-ui-css/semantic.min.css');
 require('./style.scss');
 
 var ProblemModal = React.createClass({

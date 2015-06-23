@@ -13,7 +13,7 @@ $ git submodule update
 ## Client
 
 ```
-$ pushd client && npm install && node_modules/.bin/webpack -p && popd
+$ pushd client && npm install && npm run build && popd
 ```
 
 ## Server
